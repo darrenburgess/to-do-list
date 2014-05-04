@@ -11,6 +11,27 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/_planning\/planning-notes.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_planning\/planning-notes.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/_planning\/planning-notes.md": {
+		"enableFootnoteSupport": 0,
+		"enableSmartyPants": 1,
+		"expandTabs": 1,
+		"fileType": 4096,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/_planning\/planning-notes.md",
+		"outputAbbreviatedPath": "\/_planning\/planning-notes.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/apple-touch-icon-precomposed.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -171,6 +192,17 @@
 		"outputAbbreviatedPath": "\/doc\/usage.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
+		},
+	"\/img\/wood-panel.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 418848,
+		"inputAbbreviatedPath": "\/img\/wood-panel.jpg",
+		"outputAbbreviatedPath": "\/img\/wood-panel.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		},
 	"\/index.html": {
 		"fileType": 8192,
