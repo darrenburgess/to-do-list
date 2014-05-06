@@ -25,36 +25,66 @@
 
         <div id="page-wrap">   
 
-            <img id="background-image" src="/img/wood-panel.jpg" alt="" />
+            <!-- <img id="background-image" src="/img/wood-panel.jpg" alt="" /> -->
 
             <header>
                 <h1>YATDLA</h1>            
             </header>
                 <div id="content-wrap">
-                    <form action=""></form>
+                    <form action="#" method="post">
+                        <input type="text" placeholder="Enter a task and press return..." name="Enter a task and press return...">
+                    </form>
 
                     <section>
-                        <h2>Uncompleted Items</h2>
-                        <ul>
-                            <li>Cereal</li>
-                            <li>Pasta</li>
-                            <li>Blueberries</li>
+                        <h2>3 Uncompleted Tasks
+                        <span class="icon alpha-sort"></span></h2>
+                        <ul class="uncompleted-item">
+                            <li>
+                                <div class="icon check-box unchecked"></div>
+                                <span class="item-text">Beer</span>
+                                <div class="icon trash-can"></div>
+                                <div class="icon drag-grab"></div>
+                            </li>
+                            <li>
+                                <div class="icon check-box unchecked"></div>
+                                <span class="item-text">Wine</span>
+                                <div class="icon trash-can"></div>
+                                <div class="icon drag-grab"></div>
+                            </li>
+                            <li>
+                                <div class="icon check-box unchecked"></div>
+                                <span class="item-text">Pizza</span>
+                                <div class="icon trash-can"></div>
+                                <div class="icon drag-grab"></div>
+                            </li>
                         </ul>
                     </section>
 
                     <section>
-                        <h2>Completed Items</h2>  
+                        <h2>3 Completed Tasks
+                        <span class="icon toggle-completed"></span></h2> 
                         <ul class="completed-item">
-                            <li>Milk</li>
-                            <li>Ice cream</li>
-                            <li>Beer</li>
+                            <li>
+                                <div class="icon check-box checked"></div>
+                                <span class="item-text">Cereal</span>
+                                <div class="icon trash-can"></div>
+                                <div class="icon drag-grab"></div>
+                            </li>
+                            <li>
+                                <div class="icon check-box checked"></div>
+                                <span class="item-text">Milk</span>
+                                <div class="icon trash-can"></div>
+                                <div class="icon drag-grab"></div>
+                            </li>
+                            <li>
+                                <div class="icon check-box checked"></div>
+                                <span class="item-text">Eggs</span>
+                                <div class="icon trash-can"></div>
+                                <div class="icon drag-grab"></div>
+                            </li>
                         </ul>
                     </section>
 
-                    <section>
-                        <p>Sort</p>
-                        <p>Clear</p>
-                    </section>
                 </div>
 
             <footer>
