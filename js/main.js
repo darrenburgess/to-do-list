@@ -20,6 +20,14 @@ var toggleDisplay = function(className){
 	$(className).toggle();
 };
 
+var countElements = function(selector){
+	return countOfElements = $(selector).length;
+};
+
+// lets go ahead and run countElements on load so that the counts are correct
+	$( '#completed' ).text( countElements('.completed-item > li') + " Completed Tasks");
+	$( '#uncompleted' ).text( countElements('.uncompleted-item > li') + " Uncompleted Tasks");
+
 $.fn.toggleSprite = function (firstPosition, secondPosition) {
     return $(this).css('background-position',function(idx, sp){
         return sp = sp == firstPosition ? secondPosition : firstPosition;
@@ -46,7 +54,6 @@ On press enter for task item
 	clear the form
 	return to the form field
 */
-
 $('#input-submit').keyup(function(e) {
 	if(e.which == 13){
 		$('#input-submit').click();
@@ -68,9 +75,6 @@ function addItem() {
 $('#input-submit').click(addItem);
 
 
-
-
-
 /* DONE Needs refactoring
 On mouseup item checkbox (unchecked):
 	•move position of sprite to check
@@ -86,6 +90,8 @@ $(document).on('click','.icon.check-box.unchecked',function(e){
 	$('.completed-item').prepend($(this).closest('li'));
 	$(this).addClass('checked');
 	$(this).removeClass('unchecked');
+	$( '#completed' ).text( countElements('.completed-item > li') + " Completed Tasks");
+	$( '#uncompleted' ).text( countElements('.uncompleted-item > li') + " Uncompleted Tasks");
 });
 
 $(document).on('click','.icon.check-box.checked',function(e){
@@ -93,7 +99,13 @@ $(document).on('click','.icon.check-box.checked',function(e){
 	$('.uncompleted-item').append($(this).closest('li'));
 	$(this).addClass('unchecked');
 	$(this).removeClass('checked');
+	$( '#completed' ).text( countElements('.completed-item > li') + " Completed Tasks");
+	$( '#uncompleted' ).text( countElements('.uncompleted-item > li') + " Uncompleted Tasks");
+
 });
+
+
+
 
 /* 
 On drag and drop:
@@ -105,6 +117,7 @@ On drag and drop:
 */
 
 $('ul').sortable({ axis: "y" });
+
 
 /* DONE
 On mouseup trash icon:
