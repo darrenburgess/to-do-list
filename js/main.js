@@ -24,9 +24,16 @@ var countElements = function(selector){
 	return countOfElements = $(selector).length;
 };
 
-// lets go ahead and run countElements on load so that the counts are correct
+var updateCounts = function(){
 	$( '#completed' ).text( countElements('.completed-item > li') + " Completed Tasks");
 	$( '#uncompleted' ).text( countElements('.uncompleted-item > li') + " Uncompleted Tasks");
+}
+
+updateCounts();
+
+// lets go ahead and run countElements on load so that the counts are correct
+
+
 
 $.fn.toggleSprite = function (firstPosition, secondPosition) {
     return $(this).css('background-position',function(idx, sp){
@@ -70,12 +77,16 @@ function addItem() {
 			.html(itemHtmlFront + newItem + itemHtmlBack);
 		}
 	$('#input-field').val('');
+	updateCounts();
 }
 
 $('#input-submit').click(addItem);
 
 
-/* DONE Needs refactoring
+/* DONE 
+
+REFACTOR: Abstract these two events into a function
+
 On mouseup item checkbox (unchecked):
 	•move position of sprite to check
 	•remove item from uncompleted list(traverse up to li)
@@ -90,8 +101,7 @@ $(document).on('click','.icon.check-box.unchecked',function(e){
 	$('.completed-item').prepend($(this).closest('li'));
 	$(this).addClass('checked');
 	$(this).removeClass('unchecked');
-	$( '#completed' ).text( countElements('.completed-item > li') + " Completed Tasks");
-	$( '#uncompleted' ).text( countElements('.uncompleted-item > li') + " Uncompleted Tasks");
+	updateCounts();
 });
 
 $(document).on('click','.icon.check-box.checked',function(e){
@@ -99,9 +109,7 @@ $(document).on('click','.icon.check-box.checked',function(e){
 	$('.uncompleted-item').append($(this).closest('li'));
 	$(this).addClass('unchecked');
 	$(this).removeClass('checked');
-	$( '#completed' ).text( countElements('.completed-item > li') + " Completed Tasks");
-	$( '#uncompleted' ).text( countElements('.uncompleted-item > li') + " Uncompleted Tasks");
-
+	updateCounts();
 });
 
 
@@ -119,14 +127,19 @@ On drag and drop:
 $('ul').sortable({ axis: "y" });
 
 
-/* DONE
+/* DONE  
+
+REFACTOR:  should not modify both counts on any trash icon click
+
 On mouseup trash icon:
 	remove the list item from the UL
 	create a pop-over to confirm
 */
 $('ul').on('click','.icon.trash-can', function() {
 	$(this).closest('li').remove();
+	updateCounts();
 });
+
 
 /*
 On mouseup item checkbox (checked):
