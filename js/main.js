@@ -36,7 +36,7 @@ $('.toggle-completed').bind('click',function(e){
 	toggleDisplay('.completed-item');
 });
 
-/* 
+/* DONE  -  intermittant bug where item flashes on then disappears
 On press enter for task item
 	create a new LI in uncomplete list - top of list
 	animate - expand slightly in new position
@@ -60,28 +60,25 @@ function addItem() {
 			$("<li></li>").appendTo('.uncompleted-item')
 			.html(itemHtmlFront + newItem + itemHtmlBack);
 		}
-	console.log(itemHtmlFront + newItem + itemHtmlBack);
 	$('#input-field').val('');
 }
 
 $('#input-submit').click(addItem);
 
-// $('#input-field').keyup(function(e) {
-// 	// user releases return
-// 	e.preventDefault();
-// 	if(e.keyCode == 13) {
-// 		var newItem = $(this).val().trim();
-// 		alert(newItem);
-// 		if (newItem) {
-// 			console.log(newItem);
-// 		} else {
-// 			console.log("else happened");
-// 		}
-// 	}
-// });
-
 
 /* 
+On drag and drop:
+	move item to new position on list
+	if moved to completed
+		do On check item
+	if moved to uncompleted
+		do On uncheck item	
+*/
+
+$(".uncompleted-item").sortable({ axis: "y" });
+
+
+/* DONE Needs refactoring
 On mouseup item checkbox (unchecked):
 	•move position of sprite to check
 	•remove item from uncompleted list(traverse up to li)
@@ -91,16 +88,14 @@ On mouseup item checkbox (unchecked):
 	decrement uncompleted count	
 	increment completed count
 */
-$('.icon.check-box.unchecked').bind('click',function(e){
+$(document).on('click','.icon.check-box.unchecked',function(e){
 	$(this).toggleSprite('-1px 50%','-21px 50%');
-	console.log(this);
 	$('.completed-item').prepend($(this).closest('li'));
 	$(this).addClass('checked');
 	$(this).removeClass('unchecked');
 });
 
-$('.icon.check-box.checked').bind('click',function(e){
-	console.log('check query ran');
+$(document).on('click','.icon.check-box.checked',function(e){
 	$(this).toggleSprite('-1px 50%','-21px 50%');
 	$('.uncompleted-item').append($(this).closest('li'));
 	$(this).addClass('unchecked');
@@ -108,8 +103,16 @@ $('.icon.check-box.checked').bind('click',function(e){
 });
 
 
+/* DONE
+On mouseup trash icon:
+	remove the list item from the UL
+	create a pop-over to confirm
+*/
+$('ul').on('click','.icon.trash-can', function() {
+	$(this).closest('li').remove();
+});
 
-/* 
+/*
 On mouseup item checkbox (checked):
 	move position of sprite to empty check
 	remove item from completed list
@@ -126,29 +129,12 @@ On mouseup sort:
 	sort uncompleted items in alpha order
 */
 
-/* 
-On mouseup trash icon:
-	remove the list item from the UL
-	create a pop-over to confirm
-*/
 
-/* 
-On drag and drop:
-	move item to new position on list
-	if moved to completed
-		do On check item
-	if moved to uncompleted
-		do On uncheck item	
-*/
 
-/* 
-On press enter for task item
-	create a new LI in uncomplete list - top of list
-	animate - expand slightly in new position
-	increment the uncompleted count
-	clear the form
-	return to the form field
-*/
+
+
+
+
 
 
 
