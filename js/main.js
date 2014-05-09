@@ -26,6 +26,8 @@ $.fn.toggleSprite = function (firstPosition, secondPosition) {
     });
 };
 
+
+
 /* DONE
 On mouseup view toggle:
 	show and hide completed list
@@ -66,16 +68,7 @@ function addItem() {
 $('#input-submit').click(addItem);
 
 
-/* 
-On drag and drop:
-	move item to new position on list
-	if moved to completed
-		do On check item
-	if moved to uncompleted
-		do On uncheck item	
-*/
 
-$(".uncompleted-item").sortable({ axis: "y" });
 
 
 /* DONE Needs refactoring
@@ -102,6 +95,16 @@ $(document).on('click','.icon.check-box.checked',function(e){
 	$(this).removeClass('checked');
 });
 
+/* 
+On drag and drop:
+	move item to new position on list
+	if moved to completed
+		do On check item
+	if moved to uncompleted
+		do On uncheck item	
+*/
+
+$('.uncompleted-item').sortable({ axis: "y" });
 
 /* DONE
 On mouseup trash icon:
