@@ -231,7 +231,7 @@ input:focus {
 /* ICONS*/
 
 .icon {
-    background-image: url('/img/to-do-sprites.png');
+    background-image: url('../img/to-do-sprites.png');
     background-repeat: no-repeat;
     height: 18px;
     width: 18px;

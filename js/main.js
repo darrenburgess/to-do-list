@@ -104,7 +104,7 @@ On drag and drop:
 		do On uncheck item	
 */
 
-$('.uncompleted-item').sortable({ axis: "y" });
+$('ul').sortable({ axis: "y" });
 
 /* DONE
 On mouseup trash icon:
