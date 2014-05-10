@@ -78,9 +78,6 @@ function addItem() {
 
 $('form').submit(function(e){ e.preventDefault(); }); 
 
-$('#input-submit').click(addItem);
-
-
 /* DONE 
 
 REFACTOR: Abstract these two events into a function
