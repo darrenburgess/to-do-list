@@ -12,6 +12,8 @@ Cache
 
 $('input').focus();
 
+var countOfElements;
+
 /*
 General Functions and plugins
 */
@@ -27,7 +29,7 @@ var countElements = function(selector){
 var updateCounts = function(){
 	$('#completed').text(countElements('.completed-item > li'));
 	$('#uncompleted').text(countElements('.uncompleted-item > li'));
-}
+};
 
 // run countElements on load so that the counts are correct
 updateCounts();
@@ -35,7 +37,7 @@ updateCounts();
 // jQuery plugin that will shift the position of the sprite image
 $.fn.toggleSprite = function (firstPosition, secondPosition) {
     return $(this).css('background-position',function(idx, sp){
-        return sp = sp == firstPosition ? secondPosition : firstPosition;
+        return sp = sp === firstPosition ? secondPosition : firstPosition;
     });
 };
 
@@ -44,7 +46,7 @@ On click view toggle:
 	show and hide completed list
 	toggle position of sprite for eye icon.
 */
-$('.toggle-completed').bind('click',function(e){
+$('.toggle-completed').bind('click',function(){
 	$(this).toggleSprite('-82px 50%','-101px 50%');
 	toggleDisplay('.completed-item');
 });
@@ -58,7 +60,7 @@ On press enter for task item
 	return to the form field
 */
 $('form').keyup(function(e) {
-	if(e.which == 13){
+	if(e.which === 13){
 		addItem();
 	}
 });
@@ -76,7 +78,7 @@ function addItem() {
 	updateCounts();
 }
 
-$('form').submit(function(e){ e.preventDefault(); }); 
+$('form').submit(function(e){ e.preventDefault(); });
 
 /* DONE 
 
@@ -92,7 +94,7 @@ On mouseup item checkbox (unchecked):
 	increment completed count
 */
 
-$(document).on('click','.icon.check-box.unchecked',function(e){
+$(document).on('click','.icon.check-box.unchecked',function(){
 	$(this).toggleSprite('-1px 50%','-21px 50%')
 			.addClass('checked')
 			.removeClass('unchecked');
@@ -100,7 +102,7 @@ $(document).on('click','.icon.check-box.unchecked',function(e){
 	updateCounts();
 });
 
-$(document).on('click','.icon.check-box.checked',function(e){
+$(document).on('click','.icon.check-box.checked',function(){
 	$(this).toggleSprite('-1px 50%','-21px 50%')
 		.addClass('unchecked')
 		.removeClass('checked');
@@ -137,7 +139,6 @@ On click sort:
 $('.icon.alpha-sort').click(function(e){
 	var $list = $('.uncompleted-item');
 	var $listLi = $('li',$list);
-	console.log($listLi);
     $listLi.sort(function(a, b){
         var keyA = $(a).text();
         var keyB = $(b).text();
