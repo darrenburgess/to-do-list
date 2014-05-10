@@ -130,10 +130,6 @@ body{
     margin: 90px auto 0;
 }
 
-#input-submit {
-    display: none;
-}
-
 header {
     position: fixed; 
     top: 0;

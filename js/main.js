@@ -57,9 +57,9 @@ On press enter for task item
 	clear the form
 	return to the form field
 */
-$('#input-submit').keyup(function(e) {
+$('form').keyup(function(e) {
 	if(e.which == 13){
-		$('#input-submit').click();
+		addItem();
 	}
 });
 
