@@ -108,7 +108,6 @@ textarea {
 body{
     color: white;
     font-family: "Helvetica Neue","Helvetica","Arial",Sans-Serif;
-    background-color: grey;
 }
 
 #page-wrap {
@@ -202,13 +201,11 @@ li:hover {
 
 input {
     display: block;
-    margin-left: 0;
-    margin-right: auto;
-    margin-bottom: 15px;
+    margin: 0 auto 15px 0;
     background-color: white;
     padding: 6px 6px 0 10px;
     border-radius: 5px;
-    width: 570px;
+    width: 96%;
     height: 22px;
     font-size: 12px;
     border: 1px solid #b2b2b2;
@@ -217,7 +214,6 @@ input {
 ::-webkit-input-placeholder {
     font-size: .75em;
 }
-
 
 input:focus {
     border: 1px solid #1369e9;
@@ -233,9 +229,12 @@ input:focus {
     width: 18px;
 }
 
+.alpha-sort, .trash-can, .toggle-completed, .drag-grab {
+    float: right;
+}
+
 .alpha-sort {
     background-position: -60px;
-    float: right;
 }
 
 .unchecked {
@@ -248,31 +247,22 @@ input:focus {
 
 .trash-can {
     background-position: -118px;
-    float: right;
     display: none;
 }
 
 .toggle-completed { 
     background-position: -82px; /* alt: -101  */
-    float: right;
 }
 
 .drag-grab {
     background-position: -42px;
-    float: right;
     margin-right: 10px;
     display: none;
 }
 
-li:hover .trash-can {
+li:hover .trash-can, li:hover .drag-grab {
     display: inline;
 }
-
-li:hover .drag-grab {
-    display: inline;
-}
-
-
 
 
 
