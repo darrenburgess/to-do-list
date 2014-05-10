@@ -7,8 +7,8 @@ Cache
 	don't get executed more than once
 */
 
-var $iconCheckboxUnChecked = $('.icon.check-box.unchecked');
-var $iconCheckboxChecked = $('.icon.check-box.checked');
+// var $iconCheckboxUnChecked = $('.icon.check-box.unchecked');
+// var $iconCheckboxChecked = $('.icon.check-box.checked');
 
 $('input').focus();
 
@@ -25,26 +25,22 @@ var countElements = function(selector){
 };
 
 var updateCounts = function(){
-	$( '#completed' ).text( countElements('.completed-item > li') + " Completed Tasks");
-	$( '#uncompleted' ).text( countElements('.uncompleted-item > li') + " Uncompleted Tasks");
+	$('#completed').text(countElements('.completed-item > li'));
+	$('#uncompleted').text(countElements('.uncompleted-item > li'));
 }
 
+// run countElements on load so that the counts are correct
 updateCounts();
 
-// lets go ahead and run countElements on load so that the counts are correct
-
-
-
+// jQuery plugin that will shift the position of the sprite image
 $.fn.toggleSprite = function (firstPosition, secondPosition) {
     return $(this).css('background-position',function(idx, sp){
         return sp = sp == firstPosition ? secondPosition : firstPosition;
     });
 };
 
-
-
 /* DONE
-On mouseup view toggle:
+On click view toggle:
 	show and hide completed list
 	toggle position of sprite for eye icon.
 */
@@ -53,7 +49,7 @@ $('.toggle-completed').bind('click',function(e){
 	toggleDisplay('.completed-item');
 });
 
-/* DONE  -  intermittant bug where item flashes on then disappears
+/* DONE 
 On press enter for task item
 	create a new LI in uncomplete list - top of list
 	animate - expand slightly in new position
@@ -80,6 +76,8 @@ function addItem() {
 	updateCounts();
 }
 
+$('form').submit(function(e){ e.preventDefault(); }); 
+
 $('#input-submit').click(addItem);
 
 
@@ -96,24 +94,22 @@ On mouseup item checkbox (unchecked):
 	decrement uncompleted count	
 	increment completed count
 */
+
 $(document).on('click','.icon.check-box.unchecked',function(e){
-	$(this).toggleSprite('-1px 50%','-21px 50%');
+	$(this).toggleSprite('-1px 50%','-21px 50%')
+			.addClass('checked')
+			.removeClass('unchecked');
 	$('.completed-item').prepend($(this).closest('li'));
-	$(this).addClass('checked');
-	$(this).removeClass('unchecked');
 	updateCounts();
 });
 
 $(document).on('click','.icon.check-box.checked',function(e){
-	$(this).toggleSprite('-1px 50%','-21px 50%');
+	$(this).toggleSprite('-1px 50%','-21px 50%')
+		.addClass('unchecked')
+		.removeClass('checked');
 	$('.uncompleted-item').append($(this).closest('li'));
-	$(this).addClass('unchecked');
-	$(this).removeClass('checked');
 	updateCounts();
 });
-
-
-
 
 /* 
 On drag and drop:
@@ -123,15 +119,11 @@ On drag and drop:
 	if moved to uncompleted
 		do On uncheck item	
 */
-
 $('ul').sortable({ axis: "y" });
 
 
 /* DONE  
-
-REFACTOR:  should not modify both counts on any trash icon click
-
-On mouseup trash icon:
+On click trash icon:
 	remove the list item from the UL
 	create a pop-over to confirm
 */
@@ -141,30 +133,24 @@ $('ul').on('click','.icon.trash-can', function() {
 });
 
 
-/*
-On mouseup item checkbox (checked):
-	move position of sprite to empty check
-	remove item from completed list
-	add item to uncompleted list on bottom
-	increment uncompleted count	
-	display js var in html: 
-		http://jsfiddle.net/WxzNN/
-		http://jsfiddle.net/tewathia/3JUKf/1/
-	decrement completed count	
-*/
-
 /* 
-On mouseup sort:
+On click sort:
 	sort uncompleted items in alpha order
 */
-
-
-
-
-
-
-
-
+$('.icon.alpha-sort').click(function(e){
+	var $list = $('.uncompleted-item');
+	var $listLi = $('li',$list);
+	console.log($listLi);
+    $listLi.sort(function(a, b){
+        var keyA = $(a).text();
+        var keyB = $(b).text();
+		return (keyA > keyB) ? 1 : 0;
+	});
+	$.each($listLi, function (index, row){
+		$list.append(row);
+	});
+	e.preventDefault();
+});
 
 
 
