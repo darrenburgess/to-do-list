@@ -71,8 +71,9 @@ var itemHtmlBack = '</span><div class="icon trash-can"></div><div class="icon dr
 function addItem() {
 	var newItem = $('#input-field').val().trim();
 	if (newItem){
-			$("<li></li>").appendTo('.uncompleted-item')
-			.html(itemHtmlFront + newItem + itemHtmlBack);
+			$('.uncompleted-item').append($('<li>' + itemHtmlFront + newItem + itemHtmlBack + '</li>'));
+			// $("<li></li>").appendTo('.uncompleted-item') // cache this
+
 		}
 	$('#input-field').val('');
 	updateCounts();
@@ -135,21 +136,53 @@ $('ul').on('click','.icon.trash-can', function() {
 /* 
 On click sort:
 	sort uncompleted items in alpha order
+
+	* build an array of just the text
+	* sort that array
+	* build the html around the array
+	* create a function to build the html
+	* set break points and step thru dev tools.
 */
+var $list = $('.uncompleted-item'); 
+
 $('.icon.alpha-sort').click(function(e){
-	var $list = $('.uncompleted-item');
-	var $listLi = $('li',$list);
+	var $listLi = $list.find('li');
     $listLi.sort(function(a, b){
-        var keyA = $(a).text();
-        var keyB = $(b).text();
-		return (keyA > keyB) ? 1 : 0;
+    	var keyA = $(a).find('.item-text').html();
+        var keyB = $(b).find('.item-text').html();
+		return (keyA.toLowerCase() > keyB.toLowerCase()) ? 1 : -1;
 	});
+	$list.empty();
 	$.each($listLi, function (index, row){
 		$list.append(row);
 	});
 	e.preventDefault();
 });
 
+/* sort option 2
+http://blog.rodneyrehm.de/archives/14-Sorting-Were-Doing-It-Wrong.html
+*/
+$.fn.sortChildren = function(compare) {
+  var $children = this.children();
+  $children.sort(compare);
+  this.append($children);
+  return this;
+};
+
+$('.icon.alpha-sort').click(function(e){
+	$($list).sortChildren(function(a, b) {
+	return 	$(a).find('.item-text').html().toLowerCase() > 
+			$(b).find('.item-text').html().toLowerCase() 
+			? 1 : -1;
+	});
+});
+
+
+
+
+/*
+On click edit item
+*/
 
 
 //end jQuery 
