@@ -73,7 +73,6 @@ function addItem() {
 	if (newItem){
 			$('.uncompleted-item').append($('<li>' + itemHtmlFront + newItem + itemHtmlBack + '</li>'));
 			// $("<li></li>").appendTo('.uncompleted-item') // cache this
-
 		}
 	$('#input-field').val('');
 	updateCounts();
@@ -145,19 +144,19 @@ On click sort:
 */
 var $list = $('.uncompleted-item'); 
 
-$('.icon.alpha-sort').click(function(e){
-	var $listLi = $list.find('li');
-    $listLi.sort(function(a, b){
-    	var keyA = $(a).find('.item-text').html();
-        var keyB = $(b).find('.item-text').html();
-		return (keyA.toLowerCase() > keyB.toLowerCase()) ? 1 : -1;
-	});
-	$list.empty();
-	$.each($listLi, function (index, row){
-		$list.append(row);
-	});
-	e.preventDefault();
-});
+// $('.icon.alpha-sort').click(function(e){
+// 	var $listLi = $list.find('li');
+//     $listLi.sort(function(a, b){
+//     	var keyA = $(a).find('.item-text').html();
+//         var keyB = $(b).find('.item-text').html();
+// 		return (keyA.toLowerCase() > keyB.toLowerCase()) ? 1 : -1;
+// 	});
+// 	$list.empty();
+// 	$.each($listLi, function (index, row){
+// 		$list.append(row);
+// 	});
+// 	e.preventDefault();
+// });
 
 /* sort option 2
 http://blog.rodneyrehm.de/archives/14-Sorting-Were-Doing-It-Wrong.html
