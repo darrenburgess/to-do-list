@@ -1,5 +1,6 @@
 <?php
     require_once('php/global.php');
+    require_once('php/functions.php');
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -39,28 +40,29 @@
                         <input id="input-field"  type="text" placeholder="Enter a task and press return..." name="Enter a task and press return...">
                     </form>
 
+                    <?php 
+                        $records = find_uncompleted_items();
+                        $foundCount = count($records);
+                    ?>
+
                     <section>
-                        <h2><span id="uncompleted">3</span> Uncompleted Tasks
+                        <h2><span id="uncompleted"><?php echo $foundCount;?></span> Uncompleted Tasks
                         <span class="icon alpha-sort"></span></h2>
                         <ul class="uncompleted-item">
-                            <li>
-                                <div class="icon check-box unchecked"></div>
-                                <span class="item-text">Wine</span>
-                                <div class="icon trash-can"></div>
-                                <div class="icon drag-grab"></div>
-                            </li>
-                            <li>
-                                <div class="icon check-box unchecked"></div>
-                                <span class="item-text">Soda</span>
-                                <div class="icon trash-can"></div>
-                                <div class="icon drag-grab"></div>
-                            </li>
-                            <li>
-                                <div class="icon check-box unchecked"></div>
-                                <span class="item-text">Beer</span>
-                                <div class="icon trash-can"></div>
-                                <div class="icon drag-grab"></div>
-                            </li>
+                            <?php
+                                foreach ($records as $record) {
+                                    $item = $record->getField('item');
+                                    echo '
+                                    <li>
+                                        <div class="icon check-box unchecked"></div>
+                                        <span class="item-text">'.$item.'</span>
+                                        <div class="icon trash-can"></div>
+                                        <div class="icon drag-grab"></div>
+                                    </li>
+                                    ';
+                                }
+                                
+                            ?>    
                         </ul>
                     </section>
 

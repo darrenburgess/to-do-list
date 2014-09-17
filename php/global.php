@@ -6,7 +6,6 @@
 
 	require_once dirname(__FILE__).'/../../FM_API/FileMaker.php';
 
-	$fm = new FileMaker('yatdl','192.168.1.52','cwp','cwp123');
+	$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
 
-	$layoutObject = $fm->getLayout('web_find_item');
 ?>	

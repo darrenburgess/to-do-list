@@ -32,7 +32,7 @@ var updateCounts = function(){
 };
 
 // run countElements on load so that the counts are correct
-updateCounts();
+//updateCounts();
 
 // jQuery plugin that will shift the position of the sprite image
 $.fn.toggleSprite = function (firstPosition, secondPosition) {
