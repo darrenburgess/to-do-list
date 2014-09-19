@@ -54,10 +54,10 @@ $('.toggle-completed').bind('click',function(){
 /* DONE 
 On press enter for task item
 	create a new LI in uncomplete list - top of list
-	animate - expand slightly in new position
 	increment the uncompleted count
 	clear the form
 	return to the form field
+	post the data to database
 */
 $('form').keyup(function(e) {
 	if(e.which === 13){
@@ -70,43 +70,31 @@ var itemHtmlBack = '</span><div class="icon trash-can"></div><div class="icon dr
 
 function addItem() {
 	var newItem = $('#input-field').val().trim();
-	if (newItem){
-			$('.uncompleted-item').append($('<li>' + itemHtmlFront + newItem + itemHtmlBack + '</li>'));
-		}
+
 	$('#input-field').val('');
-
-	var dataString = 'newItem=' + newItem;
-
-	console.log(dataString);
 
 	$.ajax({
 		type: "POST",
 		url: "php/addItem.php",
-		data: dataString,
+		data: 'newItem=' + newItem,
 		cache: false,
 		success: function(result) {
-			console.log(result);
+			if (newItem){
+				$('.uncompleted-item').append($('<li>' + itemHtmlFront + newItem + itemHtmlBack + '</li>'));
+			}
+			updateCounts();
 		}
 	});
-	updateCounts();
 }
-
-// http://www.formget.com/form-submission-using-ajax-php-and-javascript/
 
 $('form').submit(function(e){ e.preventDefault(); });
 
 /* DONE 
 
-REFACTOR: Abstract these two events into a function
-
 On mouseup item checkbox (unchecked):
 	•move position of sprite to check
 	•remove item from uncompleted list(traverse up to li)
 	•add item to completed list on bottom
-	addClass() and removeClass()
-	animate the move
-	decrement uncompleted count	
-	increment completed count
 */
 
 $(document).on('click','.icon.check-box.unchecked',function(){
@@ -128,10 +116,6 @@ $(document).on('click','.icon.check-box.checked',function(){
 /* 
 On drag and drop:
 	move item to new position on list
-	if moved to completed
-		do On check item
-	if moved to uncompleted
-		do On uncheck item	
 */
 $('ul').sortable({ axis: "y" });
 
@@ -142,10 +126,24 @@ On click trash icon:
 	create a pop-over to confirm
 */
 $('ul').on('click','.icon.trash-can', function() {
+	var recId = $(this).closest('li').attr('id');
+	console.log (recId);
+	$.ajax({
+		type: "POST",
+		url: "php/deleteItem.php",
+		data: 'recId=' + recId,
+		cache: false,
+		success: function(result) {
+			//
+		},
+		error: function(result) {
+			console.log("error in php");
+		}
+	});
 	$(this).closest('li').remove();
 	updateCounts();
+	
 });
-
 
 /* 
 On click sort:
@@ -158,20 +156,6 @@ On click sort:
 	* set break points and step thru dev tools.
 */
 var $list = $('.uncompleted-item'); 
-
-// $('.icon.alpha-sort').click(function(e){
-// 	var $listLi = $list.find('li');
-//     $listLi.sort(function(a, b){
-//     	var keyA = $(a).find('.item-text').html();
-//         var keyB = $(b).find('.item-text').html();
-// 		return (keyA.toLowerCase() > keyB.toLowerCase()) ? 1 : -1;
-// 	});
-// 	$list.empty();
-// 	$.each($listLi, function (index, row){
-// 		$list.append(row);
-// 	});
-// 	e.preventDefault();
-// });
 
 /* sort option 2
 http://blog.rodneyrehm.de/archives/14-Sorting-Were-Doing-It-Wrong.html

@@ -23,8 +23,9 @@
 	function build_list($records,$checked) {
 		foreach ($records as $record) {
             $item = $record->getField('item');
+            $id = $record->getRecordId();
             echo <<<EOT
-            <li>
+            <li id="$id">
                 <div class="icon check-box $checked"></div>
                 <span class="item-text">$item</span>
                 <div class="icon trash-can"></div>
