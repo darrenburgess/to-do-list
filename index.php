@@ -40,10 +40,10 @@
 						<input id="input-field"  type="text" placeholder="Enter a task and press return..." name="Enter a task and press return...">
 					</form>
 
-					<?php 
-						$records = find_items('unchecked');
-						$foundCountUnchecked = count($records);
-					?>
+						<?php 
+							$records = find_items('unchecked');
+							$foundCountUnchecked = count($records);
+						?>
 
 					<section>
 						<h2><span id="uncompleted"><?php echo $foundCountUnchecked;?></span> Uncompleted Tasks
@@ -55,13 +55,13 @@
 						</ul>
 					</section>
 
-					<?php 
-						$records = find_items('checked');
-						$foundCountUnchecked = count($records);
-					?>
+						<?php 
+							$records = find_items('checked');
+							$foundCountChecked = count($records);
+						?>
 
 					<section>
-						<h2><span id="completed">0</span> Completed Tasks
+						<h2><span id="completed"><?php echo $foundCountChecked;?></span> Completed Tasks
 						<span class="icon toggle-completed"></span></h2> 
 						<ul class="completed-item">
 							<?php

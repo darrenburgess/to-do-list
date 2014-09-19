@@ -1,5 +1,7 @@
 <?php
 
+
+
 	function find_items($type) {
 		$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
 		$request = $fm->newFindCommand('web_find_item');
@@ -8,6 +10,7 @@
 		} else {
 			$request->addFindCriterion('status', 1 );
 		}
+		$request->addSortRule('sortOrder', 1, FILEMAKER_SORT_ASCEND);
 		$result = $request->execute();
 		$records = $result->getRecords();
 		if (fm_error(__FUNCTION__,$result) === TRUE) {

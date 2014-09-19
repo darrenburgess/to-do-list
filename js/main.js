@@ -72,11 +72,26 @@ function addItem() {
 	var newItem = $('#input-field').val().trim();
 	if (newItem){
 			$('.uncompleted-item').append($('<li>' + itemHtmlFront + newItem + itemHtmlBack + '</li>'));
-			// $("<li></li>").appendTo('.uncompleted-item') // cache this
 		}
 	$('#input-field').val('');
+
+	var dataString = 'newItem=' + newItem;
+
+	console.log(dataString);
+
+	$.ajax({
+		type: "POST",
+		url: "php/addItem.php",
+		data: dataString,
+		cache: false,
+		success: function(result) {
+			console.log(result);
+		}
+	});
 	updateCounts();
 }
+
+// http://www.formget.com/form-submission-using-ajax-php-and-javascript/
 
 $('form').submit(function(e){ e.preventDefault(); });
 
