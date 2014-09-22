@@ -6,7 +6,7 @@
 		$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
 		$request = $fm->newFindCommand('web_find_item');
 		if($type==='unchecked'){
-			$request->addFindCriterion('status', '=');
+			$request->addFindCriterion('status', 0 );
 		} else {
 			$request->addFindCriterion('status', 1 );
 		}

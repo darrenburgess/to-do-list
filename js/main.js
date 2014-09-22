@@ -89,8 +89,7 @@ function addItem() {
 
 $('form').submit(function(e){ e.preventDefault(); });
 
-/* DONE 
-
+/*  
 On mouseup item checkbox (unchecked):
 	•move position of sprite to check
 	•remove item from uncompleted list(traverse up to li)
@@ -98,6 +97,19 @@ On mouseup item checkbox (unchecked):
 */
 
 $(document).on('click','.icon.check-box.unchecked',function(){
+	var recId = $(this).closest('li').attr('id');
+	$.ajax({
+		type: "POST",
+		url: "php/toggleStatus.php",
+		data: {
+			recId: recId,
+			status: 1
+		},
+		cache: false,
+		success: function(){
+			console.log('made checked');
+		}
+	});
 	$(this).toggleSprite('-1px 50%','-21px 50%')
 			.addClass('checked')
 			.removeClass('unchecked');
@@ -106,6 +118,20 @@ $(document).on('click','.icon.check-box.unchecked',function(){
 });
 
 $(document).on('click','.icon.check-box.checked',function(){
+	var recId = $(this).closest('li').attr('id');
+	$.ajax({
+		type: "POST",
+		url: "php/toggleStatus.php",
+		data: {
+			recId: recId,
+			status: 0
+		},
+		cache: false,
+		success: function(result){
+			console.log('made unchecked');
+			var ajaxResult = "Successful Ajax";
+		}
+	});
 	$(this).toggleSprite('-1px 50%','-21px 50%')
 		.addClass('unchecked')
 		.removeClass('checked');
