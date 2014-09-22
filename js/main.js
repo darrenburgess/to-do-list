@@ -91,34 +91,42 @@ $('form').submit(function(e){ e.preventDefault(); });
 
 /*  
 On mouseup item checkbox (unchecked):
-	•move position of sprite to check
-	•remove item from uncompleted list(traverse up to li)
-	•add item to completed list on bottom
+	• update database status
+	• move position of sprite to check
+	• remove item from uncompleted list(traverse up to li)
+	• add item to completed list on bottom
 */
 
-$(document).on('click','.icon.check-box.unchecked',function(){
-	var recId = $(this).closest('li').attr('id');
-	$.ajax({
-		type: "POST",
-		url: "php/toggleStatus.php",
-		data: {
-			recId: recId,
-			status: 1
-		},
-		cache: false,
-		success: function(){
-			console.log('made checked');
-		}
+	$(document).on('click','.icon.check-box.unchecked',function(){
+		var recId = $(this).closest('li').attr('id');
+		var element = $(this);
+		$.ajax({
+			type: "POST",
+			url: "php/toggleStatus.php",
+			data: {
+				recId: recId,
+				status: 1
+			},
+			cache: false,
+			success: function(data){
+				console.log(data);
+				if(data != 101){
+					element.toggleSprite('-1px 50%','-21px 50%')
+					.addClass('checked')
+					.removeClass('unchecked');
+					$('.completed-item').prepend(element.closest('li'));
+					updateCounts();
+				}
+			},
+			error: function(){
+				alert('there was a database error');
+			}
+		});
 	});
-	$(this).toggleSprite('-1px 50%','-21px 50%')
-			.addClass('checked')
-			.removeClass('unchecked');
-	$('.completed-item').prepend($(this).closest('li'));
-	updateCounts();
-});
 
 $(document).on('click','.icon.check-box.checked',function(){
 	var recId = $(this).closest('li').attr('id');
+	var element = $(this);
 	$.ajax({
 		type: "POST",
 		url: "php/toggleStatus.php",
@@ -127,16 +135,17 @@ $(document).on('click','.icon.check-box.checked',function(){
 			status: 0
 		},
 		cache: false,
-		success: function(result){
-			console.log('made unchecked');
-			var ajaxResult = "Successful Ajax";
+		success: function(data){
+			console.log(data);
+			if(data != 101){
+				element.toggleSprite('-1px 50%','-21px 50%')
+				.addClass('unchecked')
+				.removeClass('checked');
+				$('.uncompleted-item').append(element.closest('li'));
+				updateCounts();
+			}
 		}
 	});
-	$(this).toggleSprite('-1px 50%','-21px 50%')
-		.addClass('unchecked')
-		.removeClass('checked');
-	$('.uncompleted-item').append($(this).closest('li'));
-	updateCounts();
 });
 
 /* 
@@ -146,7 +155,7 @@ On drag and drop:
 $('ul').sortable({ axis: "y" });
 
 
-/* DONE  
+/*   
 On click trash icon:
 	remove the list item from the UL
 	create a pop-over to confirm
@@ -200,9 +209,6 @@ $('.icon.alpha-sort').click(function(e){
 			? 1 : -1;
 	});
 });
-
-
-
 
 /*
 On click edit item
