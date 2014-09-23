@@ -10,4 +10,8 @@
 		$result = $rec->commit();
 	}
 
+	$error = $result->getCode();
+
+	echo $error;
+
 ?>

@@ -25,7 +25,7 @@
             $item = $record->getField('item');
             $id = $record->getRecordId();
             echo <<<EOT
-            <li id="$id">
+            <li id="item_$id">
                 <div class="icon check-box $checked"></div>
                 <span class="item-text">$item</span>
                 <div class="icon trash-can"></div>

@@ -31,9 +31,6 @@ var updateCounts = function(){
 	$('#uncompleted').text(countElements('.uncompleted-item > li'));
 };
 
-// run countElements on load so that the counts are correct
-//updateCounts();
-
 // jQuery plugin that will shift the position of the sprite image
 $.fn.toggleSprite = function (firstPosition, secondPosition) {
     return $(this).css('background-position',function(idx, sp){
@@ -41,7 +38,7 @@ $.fn.toggleSprite = function (firstPosition, secondPosition) {
     });
 };
 
-/* DONE
+/* 
 On click view toggle:
 	show and hide completed list
 	toggle position of sprite for eye icon.
@@ -78,11 +75,17 @@ function addItem() {
 		url: "php/addItem.php",
 		data: 'newItem=' + newItem,
 		cache: false,
-		success: function(result) {
-			if (newItem){
+		success: function(result){
+			if (!!result){
+				console.log('test');
+			} else {
 				$('.uncompleted-item').append($('<li>' + itemHtmlFront + newItem + itemHtmlBack + '</li>'));
+				updateCounts();
 			}
-			updateCounts();
+
+		},
+		error: function(result){
+			console.log(result);
 		}
 	});
 }
@@ -97,35 +100,34 @@ On mouseup item checkbox (unchecked):
 	• add item to completed list on bottom
 */
 
-	$(document).on('click','.icon.check-box.unchecked',function(){
-		var recId = $(this).closest('li').attr('id');
-		var element = $(this);
-		$.ajax({
-			type: "POST",
-			url: "php/toggleStatus.php",
-			data: {
-				recId: recId,
-				status: 1
-			},
-			cache: false,
-			success: function(data){
-				console.log(data);
-				if(data != 101){
-					element.toggleSprite('-1px 50%','-21px 50%')
-					.addClass('checked')
-					.removeClass('unchecked');
-					$('.completed-item').prepend(element.closest('li'));
-					updateCounts();
-				}
-			},
-			error: function(){
-				alert('there was a database error');
+$(document).on('click','.icon.check-box.unchecked',function(){
+	var recId = $(this).closest('li').attr('id').split('_')[1];
+	var element = $(this);
+	$.ajax({
+		type: "POST",
+		url: "php/toggleStatus.php",
+		data: {
+			recId: recId,
+			status: 1
+		},
+		cache: false,
+		success: function(result){
+			if(result != 101){
+				element.toggleSprite('-1px 50%','-21px 50%')
+				.addClass('checked')
+				.removeClass('unchecked');
+				$('.completed-item').prepend(element.closest('li'));
+				updateCounts();
 			}
-		});
+		},
+		error: function(result){
+			console.log('Error: ' + result);
+		}
 	});
+});
 
 $(document).on('click','.icon.check-box.checked',function(){
-	var recId = $(this).closest('li').attr('id');
+	var recId = $(this).closest('li').attr('id').split('_')[1];
 	var element = $(this);
 	$.ajax({
 		type: "POST",
@@ -135,15 +137,18 @@ $(document).on('click','.icon.check-box.checked',function(){
 			status: 0
 		},
 		cache: false,
-		success: function(data){
-			console.log(data);
-			if(data != 101){
+		success: function(result){
+			console.log(result);
+			if(result != 101){
 				element.toggleSprite('-1px 50%','-21px 50%')
 				.addClass('unchecked')
 				.removeClass('checked');
 				$('.uncompleted-item').append(element.closest('li'));
 				updateCounts();
-			}
+				}
+			},
+		error: function(data){
+			console.log('Error: ' + result);
 		}
 	});
 });
@@ -151,8 +156,21 @@ $(document).on('click','.icon.check-box.checked',function(){
 /* 
 On drag and drop:
 	move item to new position on list
+	http://stackoverflow.com/questions/15633341/jquery-ui-sortable-then-write-order-into-a-database
+	https://www.youtube.com/watch?v=3mOs0VY_sIw
 */
-$('ul').sortable({ axis: "y" });
+$('ul').sortable({ 
+	axis: "y",
+	update: function(event,ui){
+		var data = $(this).sortable('serialize');
+		console.log('test sorted:' + data);
+		$.ajax({
+			data: data,
+			type: 'POST',
+			url: 'php/sortUpdate.php'
+		})
+	} 
+});
 
 
 /*   
@@ -162,22 +180,22 @@ On click trash icon:
 */
 $('ul').on('click','.icon.trash-can', function() {
 	var recId = $(this).closest('li').attr('id');
-	console.log (recId);
+	var element = $(this);
 	$.ajax({
 		type: "POST",
 		url: "php/deleteItem.php",
 		data: 'recId=' + recId,
 		cache: false,
 		success: function(result) {
-			//
+			if(!!result){
+				element.closest('li').remove();
+				updateCounts();
+			}
 		},
 		error: function(result) {
-			console.log("error in php");
+			console.log("error in php"); 
 		}
 	});
-	$(this).closest('li').remove();
-	updateCounts();
-	
 });
 
 /* 

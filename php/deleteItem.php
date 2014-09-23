@@ -7,5 +7,9 @@
 	$deleteRequest = $fm->newDeleteCommand('web_find_item', $recId);
 
 	$result = $deleteRequest->execute();
-	
+
+	$error = $result->getCode();
+
+	echo $error;
+
 ?>
