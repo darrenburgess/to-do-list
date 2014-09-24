@@ -163,11 +163,14 @@ $('ul').sortable({
 	axis: "y",
 	update: function(event,ui){
 		var data = $(this).sortable('serialize');
-		console.log('test sorted:' + data);
+		// console.log('test sorted:' + data);
 		$.ajax({
 			data: data,
 			type: 'POST',
-			url: 'php/sortUpdate.php'
+			url: 'php/sortUpdate.php',
+			success: function(result){
+				console.log('IDs processed:' + result);
+			}
 		})
 	} 
 });
@@ -179,7 +182,7 @@ On click trash icon:
 	create a pop-over to confirm
 */
 $('ul').on('click','.icon.trash-can', function() {
-	var recId = $(this).closest('li').attr('id');
+	var recId = $(this).closest('li').attr('id').split('_');
 	var element = $(this);
 	$.ajax({
 		type: "POST",
