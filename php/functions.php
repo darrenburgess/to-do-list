@@ -1,7 +1,5 @@
 <?php
 
-
-
 	function find_items($type) {
 		$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
 		$request = $fm->newFindCommand('web_find_item');

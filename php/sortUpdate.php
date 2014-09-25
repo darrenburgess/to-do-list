@@ -1,7 +1,6 @@
 <?php
 	require_once('global.php');
 	$list = $_POST['item'];
-	
 	$i = 0;
 	foreach($list as $value){
 		echo $i."-".$value." ";
@@ -10,4 +9,5 @@
 		$result = $editRecord->execute();
 		$i++;
 	}
+	echo $list;
 ?>

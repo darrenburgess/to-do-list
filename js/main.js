@@ -76,11 +76,28 @@ function addItem() {
 		data: 'newItem=' + newItem,
 		cache: false,
 		success: function(result){
-			if (!!result){
+			if (!result){
 				console.log('test');
 			} else {
-				$('.uncompleted-item').append($('<li>' + itemHtmlFront + newItem + itemHtmlBack + '</li>'));
+				var data;
+				$('.uncompleted-item').append($('<li id="item_' + result.trim() + '">'	+ itemHtmlFront	+ newItem + itemHtmlBack + '</li>'));
 				updateCounts();
+				var temp = $('.uncompleted-item li').each(function(){
+					var id = +$(this).attr('id').split('_').splice(-1);
+					data = data + 'item[]=' + id + '&';
+				});
+				data = data.replace('undefined','').slice(0,-1);
+				console.log(data);
+
+				$.ajax({
+					data: data,
+					type: 'POST',
+					url: 'php/sortUpdate.php',
+					success: function(result){
+						console.log('IDs processed:' + result);
+					}
+				});
+
 			}
 
 		},
@@ -93,13 +110,14 @@ function addItem() {
 $('form').submit(function(e){ e.preventDefault(); });
 
 /*  
-On mouseup item checkbox (unchecked):
+On click item checkbox (unchecked):
 	• update database status
 	• move position of sprite to check
 	• remove item from uncompleted list(traverse up to li)
 	• add item to completed list on bottom
 */
 
+//  These two functions: combine to one
 $(document).on('click','.icon.check-box.unchecked',function(){
 	var recId = $(this).closest('li').attr('id').split('_')[1];
 	var element = $(this);
@@ -163,7 +181,7 @@ $('ul').sortable({
 	axis: "y",
 	update: function(event,ui){
 		var data = $(this).sortable('serialize');
-		// console.log('test sorted:' + data);
+		console.log('data: ' + data);
 		$.ajax({
 			data: data,
 			type: 'POST',
@@ -182,7 +200,7 @@ On click trash icon:
 	create a pop-over to confirm
 */
 $('ul').on('click','.icon.trash-can', function() {
-	var recId = $(this).closest('li').attr('id').split('_');
+	var recId = $(this).closest('li').attr('id').split('_')[1];
 	var element = $(this);
 	$.ajax({
 		type: "POST",
@@ -190,7 +208,9 @@ $('ul').on('click','.icon.trash-can', function() {
 		data: 'recId=' + recId,
 		cache: false,
 		success: function(result) {
-			if(!!result){
+			if(!result){
+				// do nothing for the moment
+			} else {
 				element.closest('li').remove();
 				updateCounts();
 			}
@@ -211,11 +231,12 @@ On click sort:
 	* create a function to build the html
 	* set break points and step thru dev tools.
 */
-var $list = $('.uncompleted-item'); 
-
 /* sort option 2
 http://blog.rodneyrehm.de/archives/14-Sorting-Were-Doing-It-Wrong.html
 */
+
+var $list = $('.uncompleted-item'); 
+
 $.fn.sortChildren = function(compare) {
   var $children = this.children();
   $children.sort(compare);
@@ -234,7 +255,6 @@ $('.icon.alpha-sort').click(function(e){
 /*
 On click edit item
 */
-
 
 //end jQuery 
 });
