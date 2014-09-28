@@ -12,7 +12,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title></title>
 		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -29,22 +29,24 @@
 
 		<div id="page-wrap">   
 
-
-			<img id="background-image" src="img/wood-panel.jpg" alt="" />
+			<!-- <img id="background-image" src="img/wood-panel.jpg" alt="" /> -->
 
 			<header>
 				<h1>YATDLA</h1>            
+				<form action="#" method="">
+					<input id="input-field"  type="text" placeholder="Enter a task and press return..." name="Enter a task and press return...">
+					<!-- <input type="submit" id="submit"> -->
+				</form>
 			</header>
 				<div id="content-wrap">
-					<form action="#" method="">
-						<input id="input-field"  type="text" placeholder="Enter a task and press return..." name="Enter a task and press return...">
-					</form>
+					
 						<?php
 							$records = find_items('unchecked');
 							$foundCountUnchecked = count($records);
 						?>
 
 					<section>
+						<br><br>
 						<h2><span id="uncompleted"><?php echo $foundCountUnchecked;?></span> Uncompleted Tasks
 						<span class="icon alpha-sort"></span></h2>
 						<ul class="uncompleted-item">

@@ -1,6 +1,9 @@
 (function($){
 $(document).ready(function() {
 
+// consider this: https://github.com/RubaXa/Sortable
+// instead of jquery and it works on mobile
+
 /*
 Cache 
 	Always try to cache jQuery call at the top so that they 
@@ -48,7 +51,7 @@ $('.toggle-completed').bind('click',function(){
 	toggleDisplay('.completed-item');
 });
 
-/* DONE 
+/*  
 On press enter for task item
 	create a new LI in uncomplete list - top of list
 	increment the uncompleted count
@@ -56,9 +59,15 @@ On press enter for task item
 	return to the form field
 	post the data to database
 */
+
+var iOS = /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
+
 $('form').keyup(function(e) {
 	if(e.which === 13){
 		addItem();
+		if(iOS){
+			$('input').blur(); 
+		}
 	}
 });
 
@@ -70,7 +79,6 @@ function addItem() {
 
 	$('#input-field').val('');
 	if(newItem){
-		console.log('new item: ' + newItem);
 		$.ajax({
 			type: "POST",
 			url: "php/addItem.php",
@@ -98,9 +106,7 @@ function addItem() {
 							console.log('IDs processed:' + result);
 						}
 					});
-
 				}
-
 			},
 			error: function(result){
 				console.log(result);

@@ -108,6 +108,7 @@ textarea {
 body{
     color: white;
     font-family: "Helvetica Neue","Helvetica","Arial",Sans-Serif;
+    background-color: darkgrey;
 }
 
 #page-wrap {
@@ -142,7 +143,7 @@ header {
 
 h1, h2 {
     letter-spacing: 1px;    
-    font-weight: 300;
+    font-weight: 750;
     width: 98%;
 }
 
@@ -155,7 +156,7 @@ h1 {
 }
 
 h2 {
-    font-size: .6em;
+    font-size: 1.25em;
 }
 
 
@@ -171,18 +172,18 @@ ul {
 li {
     border-radius: 5px;
     padding: 6px;
-    font-size: .75em;
+    font-size: 1.5em;
     width: 97%;
     color: #423e3e;
     text-shadow: 0 1px 0 rgba(255,255,255,0.8);
     background-color: white;
     margin-bottom: 5px;
-    opacity: .75;
+    opacity: 1.0;
 }
 
 .item-text {
-    padding-left: 15px;
-    font-size: 0.75em;
+    padding-left: 20px;
+    font-size: 0.85em;
 }
 
 li:hover {
@@ -206,8 +207,8 @@ input {
     padding: 6px 6px 0 10px;
     border-radius: 5px;
     width: 96%;
-    height: 22px;
-    font-size: 12px;
+    height: 2.0em;
+    font-size: 1.5em;
     border: 1px solid #b2b2b2;
 }
 
@@ -220,11 +221,16 @@ input:focus {
     outline: none;
 }
 
+#submit {
+    height: 1px;
+}
+
 /* ICONS*/
 
 .icon {
     background-image: url('../img/to-do-sprites.png');
     background-repeat: no-repeat;
+    zoom: 1.5;
     height: 18px;
     width: 18px;
 }
@@ -264,24 +270,15 @@ li:hover .trash-can, li:hover .drag-grab {
     display: inline;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* ==========================================================================
+   ========================================================================== 
+   ==========================================================================
+   ==========================================================================
+   END Author's custom styles
+   ========================================================================== 
+   ==========================================================================
+   ==========================================================================
+   ========================================================================== */  
 
 /* ==========================================================================
    Helper classes
