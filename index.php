@@ -49,7 +49,7 @@
 						<br><br>
 						<h2><span id="uncompleted"><?php echo $foundCountUnchecked;?></span> Uncompleted Tasks
 						<span class="icon alpha-sort"></span></h2>
-						<ul class="uncompleted-item">
+						<ul id="uncompletedList" class="uncompleted-item">
 							<?php
 								$list = build_list($records,'unchecked');
 							?>    
@@ -64,7 +64,7 @@
 					<section>
 						<h2><span id="completed"><?php echo $foundCountChecked;?></span> Completed Tasks
 						<span class="icon toggle-completed"></span></h2> 
-						<ul class="completed-item">
+						<ul id="completedList" class="completed-item">
 							<?php
 								$list = build_list($records,'checked');
 							?> 
@@ -76,9 +76,10 @@
 		</div>
 
 		<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<!-- <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script> -->
 		<script src="js/plugins.js"></script>
 		<script src="js/main.js"></script>
+		<script src="js/Sortable.js"></script>
 
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 		<script>

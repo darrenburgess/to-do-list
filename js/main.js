@@ -185,21 +185,29 @@ On drag and drop:
 	http://stackoverflow.com/questions/15633341/jquery-ui-sortable-then-write-order-into-a-database
 	https://www.youtube.com/watch?v=3mOs0VY_sIw
 */
-$('ul').sortable({ 
-	axis: "y",
-	update: function(event,ui){
-		var data = $(this).sortable('serialize');
-		console.log('data: ' + data);
-		$.ajax({
-			data: data,
-			type: 'POST',
-			url: 'php/sortUpdate.php',
-			success: function(result){
-				console.log('IDs processed:' + result);
-			}
-		})
-	} 
-});
+
+// DEPRECATED: This is the jQueryUI version
+// $('ul').sortable({ 
+// 	axis: "y",
+// 	update: function(event,ui){
+// 		var data = $(this).sortable('serialize');
+// 		console.log('data: ' + data);
+// 		$.ajax({
+// 			data: data,
+// 			type: 'POST',
+// 			url: 'php/sortUpdate.php',
+// 			success: function(result){
+// 				console.log('IDs processed:' + result);
+// 			}
+// 		})
+// 	} 
+// });
+
+var sortUncompleted = document.getElementById('uncompletedList');
+new Sortable(sortUncompleted);
+
+var sortCompleted = document.getElementById('completedList');
+new Sortable(sortCompleted);
 
 
 /*   
