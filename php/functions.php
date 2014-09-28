@@ -10,10 +10,9 @@
 		}
 		$request->addSortRule('sortOrder', 1, FILEMAKER_SORT_ASCEND);
 		$result = $request->execute();
-		$records = $result->getRecords();
-		if (fm_error(__FUNCTION__,$result) === TRUE) {
-			return;
+		if($result == "No records match the request"){
 		} else {
+			$records = $result->getRecords();
 			return $records;
 		}
 	}

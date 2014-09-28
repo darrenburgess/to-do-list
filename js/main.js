@@ -69,42 +69,44 @@ function addItem() {
 	var newItem = $('#input-field').val().trim();
 
 	$('#input-field').val('');
+	if(newItem){
+		console.log('new item: ' + newItem);
+		$.ajax({
+			type: "POST",
+			url: "php/addItem.php",
+			data: 'newItem=' + newItem,
+			cache: false,
+			success: function(result){
+				if (!result){
+					console.log('test');
+				} else {
+					var data;
+					$('.uncompleted-item').append($('<li id="item_' + result.trim() + '">'	+ itemHtmlFront	+ newItem + itemHtmlBack + '</li>'));
+					updateCounts();
+					var temp = $('.uncompleted-item li').each(function(){
+						var id = +$(this).attr('id').split('_').splice(-1);
+						data = data + 'item[]=' + id + '&';
+					});
+					data = data.replace('undefined','').slice(0,-1);
+					console.log(data);
 
-	$.ajax({
-		type: "POST",
-		url: "php/addItem.php",
-		data: 'newItem=' + newItem,
-		cache: false,
-		success: function(result){
-			if (!result){
-				console.log('test');
-			} else {
-				var data;
-				$('.uncompleted-item').append($('<li id="item_' + result.trim() + '">'	+ itemHtmlFront	+ newItem + itemHtmlBack + '</li>'));
-				updateCounts();
-				var temp = $('.uncompleted-item li').each(function(){
-					var id = +$(this).attr('id').split('_').splice(-1);
-					data = data + 'item[]=' + id + '&';
-				});
-				data = data.replace('undefined','').slice(0,-1);
-				console.log(data);
+					$.ajax({
+						data: data,
+						type: 'POST',
+						url: 'php/sortUpdate.php',
+						success: function(result){
+							console.log('IDs processed:' + result);
+						}
+					});
 
-				$.ajax({
-					data: data,
-					type: 'POST',
-					url: 'php/sortUpdate.php',
-					success: function(result){
-						console.log('IDs processed:' + result);
-					}
-				});
+				}
 
+			},
+			error: function(result){
+				console.log(result);
 			}
-
-		},
-		error: function(result){
-			console.log(result);
-		}
-	});
+		});
+	}
 }
 
 $('form').submit(function(e){ e.preventDefault(); });

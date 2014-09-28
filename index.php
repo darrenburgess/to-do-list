@@ -39,8 +39,7 @@
 					<form action="#" method="">
 						<input id="input-field"  type="text" placeholder="Enter a task and press return..." name="Enter a task and press return...">
 					</form>
-
-						<?php 
+						<?php
 							$records = find_items('unchecked');
 							$foundCountUnchecked = count($records);
 						?>
