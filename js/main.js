@@ -208,14 +208,19 @@ var sortUncompleted = document.getElementById('uncompletedList');
 new Sortable(sortUncompleted, {
 	filter: '.icon',
 	onEnd: function(event){
-		var data = $(this).toArray();
+		var data;
+		var temp = $('.uncompleted-item li').each(function(){
+						var id = +$(this).attr('id').split('_').splice(-1);
+						data = data + 'item[]=' + id + '&';
+					});
+		data = data.replace('undefined','').slice(0,-1);
 		console.log('data: ' + data);
 		$.ajax({
 			data: data,
 			type: 'POST',
 			url: 'php/sortUpdate.php',
 			success: function(result){
-				console.log('IDs processed:' + result);
+				// console.log('IDs processed:' + result);
 			}
 		});
 	}
