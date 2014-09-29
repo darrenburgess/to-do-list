@@ -191,7 +191,7 @@ li:hover {
 }
 
 .completed-item {
-    opacity: .5;
+    opacity: 1.0;
 }
 
 .check-box {
@@ -253,7 +253,7 @@ input:focus {
 
 .trash-can {
     background-position: -118px;
-    display: none;
+    /*display: none;*/
 }
 
 .toggle-completed { 

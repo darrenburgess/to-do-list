@@ -129,6 +129,7 @@ On click item checkbox (unchecked):
 $(document).on('click','.icon.check-box.unchecked',function(){
 	var recId = $(this).closest('li').attr('id').split('_')[1];
 	var element = $(this);
+	alert('test');
 	$.ajax({
 		type: "POST",
 		url: "php/toggleStatus.php",
@@ -186,7 +187,7 @@ On drag and drop:
 	https://www.youtube.com/watch?v=3mOs0VY_sIw
 */
 
-// DEPRECATED: This is the jQueryUI version
+// DEPRECATED: This is the jQueryUI version of sort
 // $('ul').sortable({ 
 // 	axis: "y",
 // 	update: function(event,ui){
@@ -199,12 +200,26 @@ On drag and drop:
 // 			success: function(result){
 // 				console.log('IDs processed:' + result);
 // 			}
-// 		})
+// 		});
 // 	} 
 // });
 
 var sortUncompleted = document.getElementById('uncompletedList');
-new Sortable(sortUncompleted);
+new Sortable(sortUncompleted, {
+	filter: '.icon',
+	onEnd: function(event){
+		var data = $(this).toArray();
+		console.log('data: ' + data);
+		$.ajax({
+			data: data,
+			type: 'POST',
+			url: 'php/sortUpdate.php',
+			success: function(result){
+				console.log('IDs processed:' + result);
+			}
+		});
+	}
+});
 
 var sortCompleted = document.getElementById('completedList');
 new Sortable(sortCompleted);
