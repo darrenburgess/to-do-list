@@ -187,23 +187,6 @@ On drag and drop:
 	https://www.youtube.com/watch?v=3mOs0VY_sIw
 */
 
-// DEPRECATED: This is the jQueryUI version of sort
-// $('ul').sortable({ 
-// 	axis: "y",
-// 	update: function(event,ui){
-// 		var data = $(this).sortable('serialize');
-// 		console.log('data: ' + data);
-// 		$.ajax({
-// 			data: data,
-// 			type: 'POST',
-// 			url: 'php/sortUpdate.php',
-// 			success: function(result){
-// 				console.log('IDs processed:' + result);
-// 			}
-// 		});
-// 	} 
-// });
-
 var sortUncompleted = document.getElementById('uncompletedList');
 new Sortable(sortUncompleted, {
 	filter: '.icon',
