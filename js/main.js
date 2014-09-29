@@ -129,7 +129,6 @@ On click item checkbox (unchecked):
 $(document).on('click','.icon.check-box.unchecked',function(){
 	var recId = $(this).closest('li').attr('id').split('_')[1];
 	var element = $(this);
-	alert('test');
 	$.ajax({
 		type: "POST",
 		url: "php/toggleStatus.php",
@@ -143,7 +142,10 @@ $(document).on('click','.icon.check-box.unchecked',function(){
 				element.toggleSprite('-1px 50%','-21px 50%')
 				.addClass('checked')
 				.removeClass('unchecked');
-				$('.completed-item').prepend(element.closest('li'));
+				setTimeout(function() {
+    				$('.completed-item').prepend(element.closest('li'));
+				}, 500);
+					
 				updateCounts();
 			}
 		},
@@ -187,31 +189,33 @@ On drag and drop:
 	https://www.youtube.com/watch?v=3mOs0VY_sIw
 */
 
-var sortUncompleted = document.getElementById('uncompletedList');
-new Sortable(sortUncompleted, {
-	filter: '.icon',
-	onEnd: function(event){
-		var data;
-		var temp = $('.uncompleted-item li').each(function(){
-						var id = +$(this).attr('id').split('_').splice(-1);
-						data = data + 'item[]=' + id + '&';
-					});
-		data = data.replace('undefined','').slice(0,-1);
-		console.log('data: ' + data);
-		$.ajax({
-			data: data,
-			type: 'POST',
-			url: 'php/sortUpdate.php',
-			success: function(result){
-				// console.log('IDs processed:' + result);
-			}
-		});
-	}
-});
+var dragAndDrop = function (listElement, dataElement){
+	var theList = document.getElementById(listElement);
+	new Sortable(theList, {
+		filter: '.icon',
+		onEnd: function(event){
+			var data;
+			var temp = $(dataElement).each(function(){
+							var id = +$(this).attr('id').split('_').splice(-1);
+							data = data + 'item[]=' + id + '&';
+						});
+			data = data.replace('undefined','').slice(0,-1);
+			console.log('data: ' + data);
+			$.ajax({
+				data: data,
+				type: 'POST',
+				url: 'php/sortUpdate.php',
+				success: function(result){
+					// 
+				}
+			});
+		}
+	});
+};
 
-var sortCompleted = document.getElementById('completedList');
-new Sortable(sortCompleted);
+dragAndDrop('uncompletedList', '.uncompleted-item li');
 
+dragAndDrop('completedList', '.completed-item li');
 
 /*   
 On click trash icon:
