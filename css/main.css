@@ -173,7 +173,7 @@ li {
     border-radius: 5px;
     padding: 6px;
     font-size: 1.5em;
-    width: 97%;
+    width: 80%;
     color: #423e3e;
     text-shadow: 0 1px 0 rgba(255,255,255,0.8);
     background-color: white;
@@ -183,7 +183,7 @@ li {
 
 .item-text {
     padding-left: 20px;
-    font-size: 0.85em;
+    font-size: 0.75em;
 }
 
 li:hover {

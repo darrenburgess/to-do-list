@@ -4,11 +4,11 @@ $(document).ready(function() {
 /*
 Mobile Bugs:
 - scrolling can drag drop (create scroll bar or only allow drag/drop on tap of edit button
-- on refresh, first touch selects an item and displays keyboard
 
 Other Todo:
 - alpha sort should write to database
 - add alpha sort to completed items
+- commenting improvements
 
 */
 
@@ -155,7 +155,6 @@ $(document).on('click','.icon.check-box.unchecked',function(){
 				setTimeout(function() {
     				$('.completed-item').prepend(element.closest('li'));
 				}, 500);
-					
 				updateCounts();
 			}
 		},

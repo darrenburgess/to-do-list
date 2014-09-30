@@ -35,7 +35,6 @@
 				<h1>YATDLA</h1>            
 				<form action="#" method="">
 					<input id="input-field"  type="text" placeholder="Enter a task and press return..." name="Enter a task and press return...">
-					<!-- <input type="submit" id="submit"> -->
 				</form>
 			</header>
 				<div id="content-wrap">
