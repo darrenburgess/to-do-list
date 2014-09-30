@@ -1,8 +1,16 @@
 (function($){
 $(document).ready(function() {
 
-// consider this: https://github.com/RubaXa/Sortable
-// instead of jquery and it works on mobile
+/*
+Mobile Bugs:
+- scrolling can drag drop (create scroll bar or only allow drag/drop on tap of edit button
+- on refresh, first touch selects an item and displays keyboard
+
+Other Todo:
+- alpha sort should write to database
+- add alpha sort to completed items
+
+*/
 
 /*
 Cache 
@@ -13,7 +21,7 @@ Cache
 // var $iconCheckboxUnChecked = $('.icon.check-box.unchecked');
 // var $iconCheckboxChecked = $('.icon.check-box.checked');
 
-$('input').focus();
+//$('input').focus();
 
 var countOfElements;
 
@@ -247,12 +255,6 @@ $('ul').on('click','.icon.trash-can', function() {
 /* 
 On click sort:
 	sort uncompleted items in alpha order
-
-	* build an array of just the text
-	* sort that array
-	* build the html around the array
-	* create a function to build the html
-	* set break points and step thru dev tools.
 */
 /* sort option 2
 http://blog.rodneyrehm.de/archives/14-Sorting-Were-Doing-It-Wrong.html
