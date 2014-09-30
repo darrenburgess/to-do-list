@@ -131,10 +131,8 @@ On click item checkbox (unchecked):
 	• add item to completed list on bottom
 */
 
-//  These two functions: combine to one
-$(document).on('click','.icon.check-box.unchecked',function(){
-	var recId = $(this).closest('li').attr('id').split('_')[1];
-	var element = $(this);
+var clickHandler = function(element){
+	var recId = $(element).closest('li').attr('id').split('_')[1];
 	$.ajax({
 		type: "POST",
 		url: "php/toggleStatus.php",
@@ -158,36 +156,67 @@ $(document).on('click','.icon.check-box.unchecked',function(){
 			console.log('Error: ' + result);
 		}
 	});
-});
+};
 
-$(document).on('click','.icon.check-box.checked',function(){
-	var recId = $(this).closest('li').attr('id').split('_')[1];
-	var element = $(this);
-	$.ajax({
-		type: "POST",
-		url: "php/toggleStatus.php",
-		data: {
-			recId: recId,
-			status: 0
-		},
-		cache: false,
-		success: function(result){
-			console.log(result);
-			if(result != 101){
-				element.toggleSprite('-1px 50%','-21px 50%')
-				.addClass('unchecked')
-				.removeClass('checked');
-				setTimeout(function(){
-					$('.uncompleted-item').append(element.closest('li'));
-				}, 500);
-				updateCounts();
-				}
-			},
-		error: function(data){
-			console.log('Error: ' + result);
-		}
-	});
-});
+$(document).on('click','.icon.check-box.unchecked',clickHandler($(this)));
+
+//  These two functions: combine to one
+// $(document).on('click','.icon.check-box.unchecked',function(){
+// 	var recId = $(this).closest('li').attr('id').split('_')[1];
+// 	var element = $(this);
+// 	$.ajax({
+// 		type: "POST",
+// 		url: "php/toggleStatus.php",
+// 		data: {
+// 			recId: recId,
+// 			status: 1
+// 		},
+// 		cache: false,
+// 		success: function(result){
+// 			if(result != 101){
+// 				element.toggleSprite('-1px 50%','-21px 50%')
+// 				.addClass('checked')
+// 				.removeClass('unchecked');
+// 				setTimeout(function() {
+//     				$('.completed-item').prepend(element.closest('li'));
+// 				}, 500);
+// 				updateCounts();
+// 			}
+// 		},
+// 		error: function(result){
+// 			console.log('Error: ' + result);
+// 		}
+// 	});
+// });
+
+// $(document).on('click','.icon.check-box.checked',function(){
+// 	var recId = $(this).closest('li').attr('id').split('_')[1];
+// 	var element = $(this);
+// 	$.ajax({
+// 		type: "POST",
+// 		url: "php/toggleStatus.php",
+// 		data: {
+// 			recId: recId,
+// 			status: 0
+// 		},
+// 		cache: false,
+// 		success: function(result){
+// 			console.log(result);
+// 			if(result != 101){
+// 				element.toggleSprite('-1px 50%','-21px 50%')
+// 				.addClass('unchecked')
+// 				.removeClass('checked');
+// 				setTimeout(function(){
+// 					$('.uncompleted-item').append(element.closest('li'));
+// 				}, 500);
+// 				updateCounts();
+// 				}
+// 			},
+// 		error: function(data){
+// 			console.log('Error: ' + result);
+// 		}
+// 	});
+// });
 
 /* 
 On drag and drop:
