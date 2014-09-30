@@ -177,7 +177,9 @@ $(document).on('click','.icon.check-box.checked',function(){
 				element.toggleSprite('-1px 50%','-21px 50%')
 				.addClass('unchecked')
 				.removeClass('checked');
-				$('.uncompleted-item').append(element.closest('li'));
+				setTimeout(function(){
+					$('.uncompleted-item').append(element.closest('li'));
+				}, 500);
 				updateCounts();
 				}
 			},
