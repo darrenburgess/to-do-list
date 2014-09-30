@@ -4,8 +4,8 @@ $(document).ready(function() {
 /*
 Other Todo:
 - alpha sort should write to database
-- add alpha sort to completed items
 - commenting improvements
+- combine the onClick checkbox functions
 */
 
 /*
@@ -95,7 +95,7 @@ function addItem() {
 					console.log('test');
 				} else {
 					var data;
-					$('.uncompleted-item').append($('<li id="item_' + result.trim() + '">'	+ itemHtmlFront	+ newItem + itemHtmlBack + '</li>'));
+					$('.uncompleted-item').prepend($('<li id="item_' + result.trim() + '">'	+ itemHtmlFront	+ newItem + itemHtmlBack + '</li>'));
 					updateCounts();
 					var temp = $('.uncompleted-item li').each(function(){
 						var id = +$(this).attr('id').split('_').splice(-1);
@@ -109,7 +109,7 @@ function addItem() {
 						type: 'POST',
 						url: 'php/sortUpdate.php',
 						success: function(result){
-							console.log('IDs processed:' + result);
+							// console.log('IDs processed:' + result);
 						}
 					});
 				}
