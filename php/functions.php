@@ -5,10 +5,11 @@
 		$request = $fm->newFindCommand('web_find_item');
 		if($type==='unchecked'){
 			$request->addFindCriterion('status', 0 );
+			$request->addSortRule('sortOrder', 1, FILEMAKER_SORT_ASCEND);
 		} else {
 			$request->addFindCriterion('status', 1 );
+			$request->addSortRule('item', 1, FILEMAKER_SORT_ASCEND);
 		}
-		$request->addSortRule('sortOrder', 1, FILEMAKER_SORT_ASCEND);
 		$result = $request->execute();
 		if($result == "No records match the request"){
 		} else {

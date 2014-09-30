@@ -2,14 +2,10 @@
 $(document).ready(function() {
 
 /*
-Mobile Bugs:
-- scrolling can drag drop (create scroll bar or only allow drag/drop on tap of edit button
-
 Other Todo:
 - alpha sort should write to database
 - add alpha sort to completed items
 - commenting improvements
-
 */
 
 /*
@@ -223,7 +219,6 @@ var dragAndDrop = function (listElement, dataElement){
 };
 
 dragAndDrop('uncompletedList', '.uncompleted-item li');
-
 dragAndDrop('completedList', '.completed-item li');
 
 /*   
