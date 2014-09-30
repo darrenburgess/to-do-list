@@ -21,8 +21,6 @@ Cache
 // var $iconCheckboxUnChecked = $('.icon.check-box.unchecked');
 // var $iconCheckboxChecked = $('.icon.check-box.checked');
 
-//$('input').focus();
-
 var countOfElements;
 
 /*
@@ -69,6 +67,10 @@ On press enter for task item
 */
 
 var iOS = /(iPad|iPhone|iPod)/g.test( navigator.userAgent );
+
+if (iOS === false){
+	$('input').focus();
+}
 
 $('form').keyup(function(e) {
 	if(e.which === 13){
