@@ -2,13 +2,6 @@
 $(document).ready(function() {
 
 /*
-Other Todo:
-- alpha sort should write to database
-- commenting improvements
-- combine the onClick checkbox functions
-*/
-
-/*
 Cache 
 	Always try to cache jQuery call at the top so that they 
 	don't get executed more than once
