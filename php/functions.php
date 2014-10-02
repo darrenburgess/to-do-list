@@ -1,22 +1,22 @@
 <?php
 
 	function find_items($type) {
-		$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
-		$request = $fm->newFindCommand('web_find_item');
-		if($type==='unchecked'){
-			$request->addFindCriterion('status', 0 );
-			$request->addSortRule('sortOrder', 1, FILEMAKER_SORT_ASCEND);
-		} else {
-			$request->addFindCriterion('status', 1 );
-			$request->addSortRule('item', 1, FILEMAKER_SORT_ASCEND);
+			$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
+			$request = $fm->newFindCommand('web_find_item');
+			if($type==='unchecked'){
+				$request->addFindCriterion('status', 0 );
+				$request->addSortRule('sortOrder', 1, FILEMAKER_SORT_ASCEND);
+			} else {
+				$request->addFindCriterion('status', 1 );
+				$request->addSortRule('item', 1, FILEMAKER_SORT_ASCEND);
+			}
+			$result = $request->execute();
+			if($result == "No records match the request"){
+			} else {
+				$records = $result->getRecords();
+				return $records;
+			}
 		}
-		$result = $request->execute();
-		if($result == "No records match the request"){
-		} else {
-			$records = $result->getRecords();
-			return $records;
-		}
-	}
 
 	function build_list($records,$checked) {
 		foreach ($records as $record) {
@@ -43,5 +43,8 @@ EOT;
 			}
 		}
 	}
+
+
+
 
 ?>
