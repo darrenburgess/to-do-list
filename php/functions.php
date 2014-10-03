@@ -27,7 +27,7 @@
 				return $records;
 			}
 		} else {
-			$stmt = mysqli_query($connect,'SELECT item FROM item WHERE status = '.$status);
+			$stmt = mysqli_query($connect,'SELECT item, id FROM item WHERE status = '.$status);
 			$records = mysqli_fetch_all($stmt);
 			return $records;
 		}
@@ -52,7 +52,7 @@ EOT;
 		} else {  //SQL
 			foreach ($records as $key => $value) {
 	            $item = $value[0];
-	            $id = 'test';
+	            $id = $value[1];
 	            echo <<<EOT
 	            <li id="item_$id">
 	                <div class="icon check-box $checked"></div>
