@@ -1,37 +1,37 @@
 <?php
 
 	function find_items($type) {
-			global $dataBaseType;
-			global $connect;
-			
-			if ($type ==='unchecked') {
-				$status = 0;
-			} else {
-				$status = 1;
-			}
+		global $dataBaseType;
+		global $connect;
+		
+		if ($type ==='unchecked') {
+			$status = 0;
+		} else {
+			$status = 1;
+		}
 
-			if ($dataBaseType == 'FM') {
-				$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
-				$request = $fm->newFindCommand('web_find_item');
-				if($type==='unchecked'){
-					$request->addFindCriterion('status', 0 );
-					$request->addSortRule('sortOrder', 1, FILEMAKER_SORT_ASCEND);
-				} else {
-					$request->addFindCriterion('status', 1 );
-					$request->addSortRule('item', 1, FILEMAKER_SORT_ASCEND);
-				}
-				$result = $request->execute();
-				if($result == "No records match the request"){
-				} else {
-					$records = $result->getRecords();
-					return $records;
-				}
+		if ($dataBaseType == 'FM') {
+			$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
+			$request = $fm->newFindCommand('web_find_item');
+			if($type==='unchecked'){
+				$request->addFindCriterion('status', 0 );
+				$request->addSortRule('sortOrder', 1, FILEMAKER_SORT_ASCEND);
 			} else {
-				$stmt = mysqli_query($connect,'SELECT item FROM item');
-				$records = mysqli_fetch_all($stmt);
+				$request->addFindCriterion('status', 1 );
+				$request->addSortRule('item', 1, FILEMAKER_SORT_ASCEND);
+			}
+			$result = $request->execute();
+			if($result == "No records match the request"){
+			} else {
+				$records = $result->getRecords();
 				return $records;
 			}
+		} else {
+			$stmt = mysqli_query($connect,'SELECT item FROM item WHERE status = '.$status);
+			$records = mysqli_fetch_all($stmt);
+			return $records;
 		}
+	}
 
 	function build_list($records,$checked) {
 		global $dataBaseType;
@@ -62,9 +62,8 @@ EOT;
 	            </li>
 EOT;
 			}
-
-		} // else
-    } // function
+		}
+    }
 
 	function fm_error($function,$result) {
 		if (FileMaker::isError($result)) {
