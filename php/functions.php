@@ -50,9 +50,9 @@ EOT;
 			}
 
 		} else {  //SQL
-			foreach ($records as $record) {
-	            $item = $record->getField('item');
-	            $id = $record->getRecordId();
+			foreach ($records as $key => $value) {
+	            $item = $value[0];
+	            $id = 'test';
 	            echo <<<EOT
 	            <li id="item_$id">
 	                <div class="icon check-box $checked"></div>

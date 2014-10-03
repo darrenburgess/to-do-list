@@ -1,6 +1,6 @@
 <?php
 
-	$dataBaseType = 'FM';  // SQL or FM
+	$dataBaseType = 'SQL';  // SQL or FM
 
 	ini_set ('display_errors', true);
 

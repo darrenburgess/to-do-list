@@ -42,7 +42,7 @@
 						<?php
 							$records = find_items('unchecked');
 							echo "<br><br>";
-							// print_r($records);
+							print_r($records);
 							$foundCountUnchecked = count($records);
 						?>
 
