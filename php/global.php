@@ -1,6 +1,6 @@
 <?php
 
-	$dataBaseType = 'SQL';  // SQL or FM
+	$dataBaseType = 'FM';  // SQL or FM
 
 	ini_set ('display_errors', true);
 
@@ -15,7 +15,5 @@
 		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 	}
-
-
 
 ?>	
