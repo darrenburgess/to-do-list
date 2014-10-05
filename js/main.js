@@ -85,8 +85,9 @@ function addItem() {
 			cache: false,
 			success: function(result){
 				if (!result){
-					console.log('test');
+					console.log('error');
 				} else {
+					console.log(result);
 					var data;
 					$('.uncompleted-item').prepend($('<li id="item_' + result.trim() + '">'	+ itemHtmlFront	+ newItem + itemHtmlBack + '</li>'));
 					updateCounts();
@@ -95,8 +96,6 @@ function addItem() {
 						data = data + 'item[]=' + id + '&';
 					});
 					data = data.replace('undefined','').slice(0,-1);
-					console.log(data);
-
 					$.ajax({
 						data: data,
 						type: 'POST',
