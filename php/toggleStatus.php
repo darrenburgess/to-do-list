@@ -9,7 +9,10 @@
 		$error = $result->getCode();
 		echo $error;
 	} else { 
-		mysqli_query($connect,'UPDATE item SET status = '.$status.' WHERE id = '.$recId);
+		$query = "UPDATE item SET status = ".$status." WHERE id = ".$recId;
+		if (!$connect->query($query)) {
+		    printf("Errormessage: %s\n", $connect->error,$query);
+		}
 		mysqli_close($connect);
 	}
 ?>

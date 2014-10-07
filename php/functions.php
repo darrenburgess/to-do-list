@@ -27,8 +27,8 @@
 				return $records;
 			}
 		} else {
-			$stmt = mysqli_query($connect,'SELECT item, id FROM item WHERE status = '.$status);
-			$records = mysqli_fetch_all($stmt);
+			$result = mysqli_query($connect,'SELECT item, id FROM item WHERE status = '.$status.' ORDER BY sortOrder');
+			$records = mysqli_fetch_all($result);
 			return $records;
 		}
 	}

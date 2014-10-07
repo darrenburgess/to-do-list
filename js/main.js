@@ -87,7 +87,6 @@ function addItem() {
 				if (!result){
 					console.log('error');
 				} else {
-					console.log(result);
 					var data;
 					$('.uncompleted-item').prepend($('<li id="item_' + result.trim() + '">'	+ itemHtmlFront	+ newItem + itemHtmlBack + '</li>'));
 					updateCounts();
@@ -101,13 +100,13 @@ function addItem() {
 						type: 'POST',
 						url: 'php/sortUpdate.php',
 						success: function(result){
-							// console.log('IDs processed:' + result);
+							console.log('Count list:' + result);
 						}
 					});
 				}
 			},
 			error: function(result){
-				console.log(result);
+				// console.log(result);
 			}
 		});
 	}

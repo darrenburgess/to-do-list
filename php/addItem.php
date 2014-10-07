@@ -9,15 +9,15 @@
 			$result = $rec->execute();
 			$newRecord = current($result->getRecords());
 			$recId = $newRecord->getRecordId();
+			echo $recId;
 		} else {
-			$query = "INSERT INTO item "."(item,status,sortOrder) "."VALUES ('".$data."','0','0')";
+			$query = "INSERT INTO item (item,status,sortOrder) VALUES ('".$data."','0','0')";
 			if (!$connect->query($query)) {
 			    printf("Errormessage: %s\n", $connect->error,$query);
 			}
-			$recId = mysqli::$insert_id;
+			echo $connect->insert_id;
 			mysqli_close($connect);
 		}
-		echo $recId;
 	}
 
 ?>
