@@ -12,7 +12,10 @@
 	} else {
 		$connect = mysqli_connect('localhost:8889','root','root','yatdla');
 		if (mysqli_connect_errno()) {
-		  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			$connect = mysqli_connect('192.186.198.33','root','root','yatdla');	
+			if (mysqli_connect_errno()) {
+				echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			}
 		}
 	}
 
