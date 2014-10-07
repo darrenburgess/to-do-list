@@ -135,8 +135,9 @@ $.fn.clickHandler = function(element, type, classAdd, classRemove, listAdd){
 				.removeClass(classRemove);
 				setTimeout(function() {
     				$(listAdd).prepend(element.closest('li'));
+    				updateCounts();
 				}, 500);
-				updateCounts();
+				
 			}
 		},
 		error: function(result){
