@@ -13,7 +13,6 @@
 			$query = "UPDATE item SET sortOrder = ".$i." WHERE id = ".$recId;
 			if (!$connect->query($query)) {
 				printf("Errormessage: %s\n", $connect->error,$query);
-				echo "\nQuery = ".$query;
 			}
 		}
 		$i++;

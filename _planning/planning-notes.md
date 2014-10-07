@@ -1,10 +1,15 @@
 Features and Bugs
 - count is not displaying correctly when item status is changed
 - deploy to production
-- alpha sort should write to database
 - commenting improvements
 - untrack this document
-- bug post error on FM part of addItem.php.  post works however.
+- ajax success calls should only run on sql/fm query success
+- ajax errors
+- sql injection
+- simple log in
+- simple account creation
+- item editing
+- modify find_items php function to use object oriented code
 
 
 

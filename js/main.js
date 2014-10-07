@@ -100,7 +100,7 @@ function addItem() {
 						type: 'POST',
 						url: 'php/sortUpdate.php',
 						success: function(result){
-							console.log('Count list:' + result);
+							// nothing for the moment
 						}
 					});
 				}
@@ -157,8 +157,6 @@ $(document).on('click','.icon.check-box.checked', function(){
 /* 
 On drag and drop:
 	move item to new position on list
-	http://stackoverflow.com/questions/15633341/jquery-ui-sortable-then-write-order-into-a-database
-	https://www.youtube.com/watch?v=3mOs0VY_sIw
 */
 
 var dragAndDrop = function (listElement, dataElement){
@@ -219,9 +217,6 @@ $('ul').on('click','.icon.trash-can', function() {
 On click sort:
 	sort uncompleted items in alpha order
 */
-/* sort option 2
-http://blog.rodneyrehm.de/archives/14-Sorting-Were-Doing-It-Wrong.html
-*/
 
 var $list = $('.uncompleted-item'); 
 
@@ -239,10 +234,6 @@ $('.icon.alpha-sort').click(function(e){
 			? 1 : -1;
 	});
 });
-
-/*
-On click edit item
-*/
 
 //end jQuery 
 });
