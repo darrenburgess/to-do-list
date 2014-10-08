@@ -1,4 +1,6 @@
 <?php
+	// phpinfo();
+	// die;
 	require_once('php/global.php');
 	require_once('php/functions.php');
 ?>
@@ -32,7 +34,7 @@
 			<!-- <img id="background-image" src="img/wood-panel.jpg" alt="" /> -->
 
 			<header>
-				<h1>YATDLA-test</h1>            
+				<h1>YATDLA</h1>            
 				<form action="#" method="">
 					<input id="input-field"  type="text" placeholder="Enter a task and press return..." name="Enter a task and press return...">
 				</form>
