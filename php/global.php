@@ -4,16 +4,18 @@
 
 	ini_set ('display_errors', true);
 
-	//ini_set('error_reporting', 'E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE');
+	ini_set('error_reporting', 'E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE');
 
 	if($dataBaseType === 'FM'){
 		require_once dirname(__FILE__).'/../../FM_API/FileMaker.php';
 		$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
 	} else {
-		// $connect = mysqli_connect('localhost','webapp','1z2x3c4v5b6n7m','yatdla');
-		$connect = mysqli_connect('192.168.1.52','root','root','yatdla');
+		$connect = mysqli_connect('localhost:8889','root','root','yatdla');
 		if (mysqli_connect_errno()) {
-			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			$connect = mysqli_connect('localhost','webapp','1z2x3c4v5b6n7m','yatdla');
+			if (mysqli_connect_errno()) {
+				echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			}
 		}
 	}
 

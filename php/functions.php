@@ -29,6 +29,7 @@
 		} else {
 			$result = mysqli_query($connect,'SELECT item, id FROM item WHERE status = '.$status.' ORDER BY sortOrder');
 			// $records = mysqli_fetch_all($result);
+			$records = [];
 			while ($row = $result->fetch_assoc()) {
 			    $records[] = $row;
 			}
@@ -54,8 +55,8 @@ EOT;
 
 		} else {  //SQL
 			foreach ($records as $key => $value) {
-	            $item = $value[0];
-	            $id = $value[1];
+	            $item = $value['item'];
+	            $id = $value['id'];
 	            echo <<<EOT
 	            <li id="item_$id">
 	                <div class="icon check-box $checked"></div>
