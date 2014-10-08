@@ -10,12 +10,9 @@
 		require_once dirname(__FILE__).'/../../FM_API/FileMaker.php';
 		$fm = new FileMaker('yatdla','192.168.1.52','cwp','cwp123');
 	} else {
-		$connect = mysqli_connect('localhost:8889','root','root','yatdla');
+		$connect = mysqli_connect('192.186.198.33','root','root','yatdla');
 		if (mysqli_connect_errno()) {
-			$connect = mysqli_connect('192.186.198.33','root','root','yatdla');	
-			if (mysqli_connect_errno()) {
 				echo "Failed to connect to MySQL: " . mysqli_connect_error();
-			}
 		}
 	}
 
