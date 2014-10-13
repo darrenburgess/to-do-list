@@ -1,6 +1,7 @@
 <?php
 	// phpinfo();
 	// die;
+
 	require_once('php/global.php');
 	require_once('php/functions.php');
 ?>
